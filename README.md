@@ -1,3 +1,5 @@
-# Advent of Code
+# Advent of Code 2018
 
-run via `mix run --no-mix-exs day/project.exs`
+**TODO: Add description**
+
+run with `mix run lib/day/part.exs`

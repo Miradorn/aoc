@@ -1,5 +1,5 @@
 defmodule First.Duplicate do
-  def run(file \\ "first/input.txt") do
+  def run(file \\ "lib/first/input.txt") do
     file
     |> File.read!()
     |> String.split()
