@@ -23,7 +23,11 @@ defmodule Ninth.Game do
         IO.inspect(marble)
         cond do
           rem(marble, 23) == 0 ->
-            index = rem(last_index - 7, length(board))
+            index = if last_index - 7 < 0 do
+              length(board) + (last_index - 7)
+              else
+                last_index - 7
+              end
 
             taken = Enum.at(board, index)
 
@@ -39,7 +43,7 @@ defmodule Ninth.Game do
 
             board = List.insert_at(board, index, marble)
 
-            {[{player, board, index}], {board, index, scores}}
+            {[], {board, index, scores}}
         end
       end
     )
