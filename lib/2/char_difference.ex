@@ -1,5 +1,5 @@
 defmodule Second.CharDifference do
-  def run(file \\ "lib/second/input.txt") do
+  def run(file \\ "lib/2/input.txt") do
     file
     |> File.read!()
     |> String.split()
@@ -29,5 +29,3 @@ defmodule Second.CharDifference do
     left -- left -- right
   end
 end
-
-Second.CharDifference.run() |> IO.inspect()

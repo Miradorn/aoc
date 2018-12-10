@@ -1,5 +1,5 @@
 defmodule First.Reduce do
-  def run(file \\ "lib/first/input.txt") do
+  def run(file \\ "lib/1/input.txt") do
     file
     |> File.read!()
     |> String.split()
@@ -7,5 +7,3 @@ defmodule First.Reduce do
     |> Enum.reduce(&+/2)
   end
 end
-
-First.Reduce.run() |> IO.inspect()

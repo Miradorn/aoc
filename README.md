@@ -2,4 +2,4 @@
 
 **TODO: Add description**
 
-run with `mix run lib/day/part.exs`
+run with `mix run lib/day.exs`

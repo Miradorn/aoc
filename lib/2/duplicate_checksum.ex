@@ -1,5 +1,5 @@
 defmodule Second.DuplicateChecksum do
-  def run(file \\ "lib/second/input.txt") do
+  def run(file \\ "lib/2/input.txt") do
     file
     |> File.read!()
     |> String.split()
@@ -43,5 +43,3 @@ defmodule Second.DuplicateChecksum do
     end
   end
 end
-
-Second.DuplicateChecksum.run() |> IO.inspect()

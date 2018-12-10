@@ -1,20 +1,30 @@
-defmodule Third.NoOverlap do
+defmodule Third.Overlap do
   import String, only: [to_integer: 1]
 
-  alias Third.Overlap.Claim
+  alias Third.Overlap.{Fabric, Claim}
 
-  def run(file \\ "lib/third/input.txt") do
+  def run(file \\ "lib/3/input.txt") do
     claims =
       file
       |> File.read!()
       |> String.split("\n")
       |> Enum.map(&build_claim/1)
 
+    fabric_width = claims |> Enum.max_by(&(&1.x + &1.width))
+
+    fabric_height = claims |> Enum.max_by(&(&1.y + &1.height))
+
+    fabric =
+      Fabric.new(
+        width: fabric_width.x + fabric_width.width,
+        height: fabric_height.y + fabric_height.height
+      )
+
     claims
-    |> Enum.find(fn claim ->
-      claims |> Enum.all?(&no_overlap?(&1, claim))
-    end)
-    |> Map.get(:id)
+    |> Enum.reduce(fabric, &Fabric.mark_fields_from_claim(&2, &1))
+    |> Map.get(:fields)
+    |> List.flatten()
+    |> Enum.count(&(&1 > 1))
   end
 
   def build_claim(string) do
@@ -32,12 +42,4 @@ defmodule Third.NoOverlap do
       height: to_integer(height)
     }
   end
-
-  def no_overlap?(claim, claim), do: true
-
-  def no_overlap?(l, r) do
-    l.x + l.width < r.x || l.x > r.x + r.width || l.y + l.height < r.y || l.y > r.y + r.height
-  end
 end
-
-Third.NoOverlap.run() |> IO.inspect()

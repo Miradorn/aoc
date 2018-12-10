@@ -1,5 +1,5 @@
 defmodule First.Duplicate do
-  def run(file \\ "lib/first/input.txt") do
+  def run(file \\ "lib/1/input.txt") do
     file
     |> File.read!()
     |> String.split()
@@ -21,5 +21,3 @@ defmodule First.Duplicate do
     end)
   end
 end
-
-First.Duplicate.run() |> IO.inspect()
