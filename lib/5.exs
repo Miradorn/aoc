@@ -1,1 +1,2 @@
-Fifth.Reduce.run() |> IO.inspect()
+# Fifth.Reduce.run() |> IO.inspect()
+Fifth.Optimize.run() |> IO.inspect()

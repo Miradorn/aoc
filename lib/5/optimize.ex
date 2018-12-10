@@ -1,11 +1,25 @@
-defmodule Fifth.Reduce do
+defmodule Fifth.Optimize do
   def run(file \\ "lib/5/input.txt") do
     input =
       file
       |> File.read!()
-      |> String.graphemes()
 
-    react(input) |> Enum.count()
+    ?a..?z
+    |> Enum.to_list()
+    |> List.to_string()
+    |> String.graphemes()
+    |> Enum.into(%{}, fn c ->
+      rest =
+        input
+        |> String.replace(c, "")
+        |> String.replace(String.upcase(c), "")
+        |> String.graphemes()
+        |> react()
+        |> Enum.count()
+
+      {c, rest}
+    end)
+    |> Enum.min_by(fn {c, rest} -> rest end)
   end
 
   def react(input) do

@@ -49,14 +49,13 @@ defmodule Fourth.MostAsleep do
 
     actions
     |> Enum.each(fn action ->
-
-
       Agent.update(@guards, fn guards ->
         Map.update(guards, id, fn
           nil ->
-            %{  guards |
-              id    => }
-          guard -> 
+            %{guards | id => "TODO"}
+
+          guard ->
+            nil
         end)
       end)
     end)
