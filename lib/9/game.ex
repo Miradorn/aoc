@@ -10,17 +10,16 @@ defmodule Ninth.Game do
   end
 
   def run(players, last) do
-    marbles = 1..last
+    marbles = 1..(last * 100)
     players = 1..players
 
     players
     |> Stream.cycle()
-    |> Enum.take(last)
+    |> Enum.take(last *100)
     |> Stream.zip(marbles)
     |> Enum.flat_map_reduce(
       {[0], 0, %{}},
       fn {player, marble}, {board, last_index, scores} ->
-        IO.inspect(marble)
         cond do
           rem(marble, 23) == 0 ->
             index = if last_index - 7 < 0 do
@@ -29,9 +28,7 @@ defmodule Ninth.Game do
                 last_index - 7
               end
 
-            taken = Enum.at(board, index)
-
-            board = List.delete_at(board, index)
+            {taken, board} = List.pop_at(board, index)
 
             scores =
               Map.update(scores, player, marble + taken, fn value -> value + marble + taken end)
